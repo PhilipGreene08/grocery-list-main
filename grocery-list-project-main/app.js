@@ -39,6 +39,15 @@ clear.addEventListener('click', e => {
     });
 })
 
+//delete single itemasd
+groceryList.addEventListener('click', e => {
+    e.preventDefault()
+    let itemLink = e.target.parentElement
+if(itemLink.classList.includes('grocery-item')) {
+    console.log(e.target.parentElement.classList);
+}
+    
+})
 
 
 
