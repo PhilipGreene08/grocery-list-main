@@ -46,16 +46,30 @@ clear.addEventListener('click', e => {
 //delete single item
 groceryList.addEventListener('click', e => {
     e.preventDefault()
+
     let itemLink = e.target.parentElement
     //let textToRemove = itemLink.previousElementSibling.textContent;
-    console.log(textToRemove);
     if (itemLink.classList.contains('grocery-item__link')) {
+        let textToRemove = itemLink.previousElementSibling.innerHTML
         let itemToRemove = e.target.parentElement.parentElement
+        console.log(textToRemove);
         groceryList.removeChild(itemToRemove)
-        //editStorage(textToRemove)
+        editStorage(textToRemove)
     }
 
 })
+
+function editStorage(textToRemove) {
+    let groceryItems = JSON.parse(localStorage.getItem('groceryList'))
+    let index = groceryItems.indexOf(textToRemove)
+
+    groceryItems.splice(index, 1)
+    localStorage.removeItem('groceryList')
+    localStorage.setItem('groceryList', JSON.stringify(groceryItems))
+}
+
+
+
 
 function updateStorage(newItem) {
     let groceryList
@@ -75,14 +89,4 @@ function displayStorage() {
         ))
     }
 }
-
-function editStorage(item) {
-    let groceryItems = JSON.parse(localStorage.getItem('groceryList'))
-    let index = groceryList.indexOf(item)
-
-    groceryList.splice(index, 1)
-    localStorage.removeItem('groceryList')
-    localStorage.setItem('groceryList', JSON.stringify(groceryItems))
-}
-
 
